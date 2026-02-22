@@ -10,149 +10,63 @@
   src: url("Minecraftia.ttf") format("truetype");
 }
 
-/* Reset */
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body, html { width: 100%; height: 100%; font-family: "Minecraftia", monospace; overflow: hidden; background: #000; color: white; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-/* Video Background */
-.video-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
-video { width: 100%; height: 100%; object-fit: cover; }
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Minecraftia", monospace;
+}
 
-/* Overlay */
-.content { position: relative; z-index: 1; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(0,0,0,0.35); }
+/* Background Video */
+.video-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
 /* Logo */
-.logo { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 2; }
-.logo img { height: 120px; }
-
-/* Main Button */
-.main-btn {
-  padding: 14px 30px;
-  font-family: "Minecraftia", monospace;
-  background: #3f3f3f;
-  border: 3px solid #1b1b1b;
-  color: white;
-  font-size: 1.1rem;
-  text-transform: uppercase;
-  cursor: pointer;
-  box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 4px 0 #000;
-  margin-top: 200px;
-}
-.main-btn:hover { background: #5a5a5a; }
-.main-btn:active { transform: translateY(2px); box-shadow: inset 0 2px 0 rgba(0,0,0,0.4), 0 2px 0 #000; }
-
-/* Legacy-style UI panel */
-.legacy-ui {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 460px;
-  max-width: 95%;
-  background: #2c2c2c;
-  border: 4px solid #0f0f0f;
-  box-shadow: 0 4px 0 #000, 0 0 0 3px #5a5a5a;
-  padding: 20px;
-  z-index: 10;
-  display: none;
+.logo {
+  position: relative;
+  z-index: 1;
 }
 
-/* Panel header */
-.legacy-ui h2 { font-size: 1.5rem; margin-bottom: 12px; text-shadow: 2px 2px 0 #000; }
-
-/* Legacy-style panel buttons */
-.panel-btn {
-  display: block;
-  width: 100%;
-  margin: 6px 0;
-  padding: 10px;
-  background: #3f3f3f;
-  border: 2px solid #1b1b1b;
-  color: white;
-  font-family: "Minecraftia", monospace;
-  cursor: pointer;
-  text-align: left;
-  text-transform: uppercase;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), 0 3px 0 #000;
+.logo img {
+  width: 400px;
+  max-width: 90vw;
 }
-.panel-btn:hover { background: #5a5a5a; }
-.panel-btn:active { transform: translateY(2px); box-shadow: inset 0 1px 0 rgba(0,0,0,0.4), 0 1px 0 #000; }
-
-/* Panel text content */
-.panel-content { margin-top: 10px; font-size: 0.95rem; line-height: 1.4; }
-
-/* Close Button */
-.close-btn {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  background: #3f3f3f;
-  border: 2px solid #1b1b1b;
-  padding: 2px 8px;
-  font-family: "Minecraftia", monospace;
-  cursor: pointer;
-}
-.close-btn:hover { background: #5a5a5a; }
 </style>
 </head>
+
 <body>
 
-<!-- Video Background -->
 <div class="video-container">
   <video autoplay muted loop playsinline>
     <source src="cafe panorama.mp4" type="video/mp4">
-    Your browser does not support the video tag.
   </video>
 </div>
 
-<!-- Logo -->
 <div class="logo">
-  <img src="legacy-reimagined.png" alt="Legacy Reimagined Logo">
+  <img src="legacy-reimagined.png" alt="Legacy Reimagined">
 </div>
-
-<!-- Main Content -->
-<div class="content">
-  <button class="main-btn" onclick="openPanel('infoPanel')">Open Info</button>
-</div>
-
-<!-- Legacy UI Panel -->
-<div id="infoPanel" class="legacy-ui">
-  <button class="close-btn" onclick="closePanel('infoPanel')">X</button>
-  <h2>Legacy Reimagined</h2>
-
-  <!-- Panel Buttons -->
-  <button class="panel-btn" onclick="showContent('infoContent')">Info</button>
-  <button class="panel-btn" onclick="showContent('updatesContent')">Updates</button>
-
-  <!-- Panel Content -->
-  <div id="infoContent" class="panel-content">
-    - Production has just started!!!<br>
-    - This will take a long time since I don't have a team and I am just a middle school student<br>
-    - Stay tuned!<br>
-    - Byee
-  </div>
-
-  <div id="updatesContent" class="panel-content" style="display:none;">
-    There are no updates yet.
-  </div>
-</div>
-
-<!-- Click sound -->
-<audio id="clickSound" src="click.mp3"></audio>
-
-<script>
-const click = document.getElementById('clickSound');
-
-function playClick() { click.currentTime = 0; click.play(); }
-function openPanel(id) { document.getElementById(id).style.display = 'block'; playClick(); }
-function closePanel(id) { document.getElementById(id).style.display = 'none'; playClick(); }
-function showContent(id) {
-  const contents = document.querySelectorAll('.panel-content');
-  contents.forEach(c => c.style.display = 'none');
-  document.getElementById(id).style.display = 'block';
-  playClick();
-}
-</script>
 
 </body>
 </html>
